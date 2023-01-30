@@ -1,0 +1,30 @@
+
+Your Quetion Webscraping
+
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+html = urlopen('https://stackoverflow.com/questions/tagged/python')
+bs = BeautifulSoup(html, "html.parser")
+artist_name_list = bs.find_all(class_='s-link')
+for artist_name in artist_name_list:
+  names = artist_name.contents[0]
+  print(names)
+
+
+
+Book My show Web scraping
+
+
+
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://in.bookmyshow.com/explore/home/bengaluru"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+movie_names = soup.find_all("a", class_="__movie-name")
+movie_timings = soup.find_all("div", class_="card-timing")
+
+for name, timing in zip(movie_names, movie_timings):
+    print(name.text, timing.text)
